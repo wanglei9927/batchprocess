@@ -25,6 +25,9 @@ public class JobInvokerTest {
     @Autowired
     Job processJob;
 
+    @Autowired
+    Job processMybatisJob;
+
     @Test
     void test1(){
 
@@ -32,6 +35,20 @@ public class JobInvokerTest {
                 .toJobParameters();
         try {
             jobLauncher.run(processJob, jobParameters);
+        } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    void test2(){
+        JobParameters jobParameters = new JobParametersBuilder()
+                .addLong("time", System.currentTimeMillis())
+                .addString("id", "1")
+                .toJobParameters();
+        try {
+            jobLauncher.run(processMybatisJob, jobParameters);
         } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException e) {
             e.printStackTrace();
         }

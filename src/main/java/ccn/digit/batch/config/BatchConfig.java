@@ -5,6 +5,8 @@ import ccn.digit.batch.step.Processor;
 import ccn.digit.batch.step.Reader;
 import ccn.digit.batch.step.Writer;
 import lombok.RequiredArgsConstructor;
+import org.mybatis.spring.batch.MyBatisBatchItemWriter;
+import org.mybatis.spring.batch.MyBatisCursorItemReader;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
@@ -21,12 +23,14 @@ public class BatchConfig {
 
     public final StepBuilderFactory stepBuilderFactory;
 
+
     @Bean
     public Job processJob() {
         return jobBuilderFactory.get("processJob")
                 .incrementer(new RunIdIncrementer()).listener(listener())// 监听
                 .flow(orderStep1()).end().build(); // 创建步骤1
     }
+
 
     @Bean
     // 步骤1 bean 先读再写
