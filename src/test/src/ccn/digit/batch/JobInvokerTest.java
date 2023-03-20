@@ -45,7 +45,7 @@ public class JobInvokerTest {
     void test2(){
         JobParameters jobParameters = new JobParametersBuilder()
                 .addLong("time", System.currentTimeMillis())
-                .addString("id", "1")
+                .addString("id", "3")
                 .toJobParameters();
         try {
             jobLauncher.run(processMybatisJob, jobParameters);

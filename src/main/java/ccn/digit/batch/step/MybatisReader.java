@@ -31,9 +31,9 @@ public class MybatisReader {
 
     private final DynamicRoutingDataSource master;
 
-    @Bean(name = "master1SqlSessionFactory")
+    @Bean(name = "batchSqlSessionFactory")
     @Primary
-    public SqlSessionFactory masterSqlSessionFactory()
+    public SqlSessionFactory batchSqlSessionFactory()
             {
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(master.getDataSource("master"));
@@ -58,7 +58,7 @@ public class MybatisReader {
         Map<String , Object> map = new HashMap<String , Object>();
         map.put("id" , id);
         reader.setQueryId("ccn.digit.batch.mapper.UserMapper.findById");
-        reader.setSqlSessionFactory(masterSqlSessionFactory());
+        reader.setSqlSessionFactory(batchSqlSessionFactory());
         reader.setParameterValues(map);
         return reader;
 
