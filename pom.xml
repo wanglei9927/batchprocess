@@ -65,6 +65,19 @@
 			<version>1.2.9</version>
 		</dependency>
 
+		<!--mybatis 版本 -->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+			<version>3.5.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+			<version>3.5.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

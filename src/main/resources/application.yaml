@@ -1,10 +1,54 @@
 spring:
   datasource:
-    druid:
-      url: jdbc:mysql://127.0.0.1:3306/junit_test?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
-      username: root
-      password: root
-      driver-class-name: com.mysql.jdbc.Driver
+    dynamic:
+      primary: slave
+      strict: false
+      datasource:
+        master:
+          url: jdbc:mysql://127.0.0.1:3306/junit_test?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+          username: root
+          password: root
+          driver-class-name: com.mysql.jdbc.Driver
+          druid:
+            filter: stat,wall
+            # 启用ConfigFilter
+            config:
+              enabled: true
+            stat:
+              enabled: true
+              # 慢SQL记录
+              log-slow-sql: true
+              slow-sql-millis: 30000
+              merge-sql: false
+            wall:
+              function-check: false
+              strict-syntax-check: false
+              multi-statement-allow: true
+        slave:
+          url: jdbc:mysql://127.0.0.1:3306/jzpt?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+          username: root
+          password: root
+          driver-class-name: com.mysql.jdbc.Driver
+          druid:
+            filter: stat,wall
+            # 启用ConfigFilter
+            config:
+              enabled: true
+            stat:
+              enabled: true
+              # 慢SQL记录
+              log-slow-sql: true
+              slow-sql-millis: 30000
+              merge-sql: false
+            wall:
+              function-check: false
+              strict-syntax-check: false
+              multi-statement-allow: true
+
+
+
+
+
 
   batch:
     job:
